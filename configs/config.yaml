@@ -1,0 +1,30 @@
+# Pipeline configuration. Paths relative to the repo root.
+
+data:
+  processed_dir: data/processed
+  artifacts_dir: data/artifacts
+  n_claims: 20000
+  seed: 42
+
+severity:
+  test_frac: 0.3
+  lgbm:
+    n_estimators: 300
+    learning_rate: 0.05
+    num_leaves: 31
+    verbose: -1
+
+fraud_flags:
+  late_report_days: 21
+  round_amount_tolerance: 1.0
+  claim_soon_after_policy_days: 30
+
+routing:
+  adjusters:
+    - {name: junior_pool,  max_severity_usd: 8000,  capacity: 60}
+    - {name: senior_pool,  max_severity_usd: 40000, capacity: 30}
+    - {name: complex_unit, max_severity_usd: 999999999, capacity: 12}
+  fraud_unit_threshold: 2     # flags at/above this go to SIU regardless
+
+eval:
+  experiment_name: claimsight
