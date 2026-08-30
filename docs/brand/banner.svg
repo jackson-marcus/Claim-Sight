@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="168" viewBox="0 0 720 168" role="img" aria-label="ClaimSight — Claims triage &amp; saga orchestration">
+  <defs><linearGradient id="b75137" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#2563EB"/><stop offset="1" stop-color="#1a47a9"/></linearGradient></defs>
+  <rect x="28" y="28" width="112" height="112" rx="25" fill="url(#b75137)"/>
+  <g transform="translate(56.0 56.0) scale(2.3333)"><g fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="12" r="2.2"/><circle cx="6" cy="18" r="2.2"/><path d="M8 7l8 4M8 17l8-4"/></g></g>
+  <text x="168" y="78" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="40" font-weight="700" fill="#2563EB">ClaimSight</text>
+  <text x="168" y="112" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif" font-size="20" font-weight="400" fill="#64748b">Claims triage &amp; saga orchestration</text>
+</svg>
