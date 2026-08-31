@@ -7,7 +7,14 @@ data:
   seed: 42
 
 severity:
-  test_frac: 0.3
+  # train / calibration / test. The reserve uplift is fitted on the calibration
+  # slice and its coverage measured on the test slice, which it never sees.
+  test_frac: 0.2
+  calibration_frac: 0.2
+  reserve_levels: [0.50, 0.75, 0.90, 0.95, 0.99]
+  reserve_primary_level: 0.75
+  # Promotion gate: how far measured coverage may stray from the nominal level.
+  adequacy_tolerance: 0.03
   lgbm:
     n_estimators: 300
     learning_rate: 0.05

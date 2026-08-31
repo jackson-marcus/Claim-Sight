@@ -11,6 +11,7 @@ from abc import ABC, abstractmethod
 
 from claimsight.models.triage import fraud_flags
 from claimsight.saga.types import SagaContext
+from claimsight.settings import get_config
 
 
 class SagaStep(ABC):
@@ -82,14 +83,20 @@ class FraudRiskScreeningStep(SagaStep):
 
     name = "fraud_risk_screening"
 
-    def __init__(self, max_allowed_flags: int = 2) -> None:
-        self.max_allowed_flags = max_allowed_flags
+    def __init__(self, siu_flag_threshold: int | None = None) -> None:
+        # Same threshold the triage API routes on, so a claim the API sends to
+        # SIU cannot simultaneously walk through intake to settlement.
+        self.siu_flag_threshold = (
+            int(get_config()["routing"]["fraud_unit_threshold"])
+            if siu_flag_threshold is None
+            else siu_flag_threshold
+        )
 
     def execute(self, ctx: SagaContext) -> bool:
         flags = fraud_flags(ctx.claim_payload)
         ctx.fraud_flags = flags
 
-        if len(flags) > self.max_allowed_flags:
+        if len(flags) >= self.siu_flag_threshold:
             ctx.siu_referral_id = f"siu_case_{uuid.uuid4().hex[:8]}"
             ctx.failure_reason = f"Hard block: {len(flags)} critical fraud indicators detected"
             return False
